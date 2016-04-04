@@ -1,0 +1,56 @@
+{
+  "name": "example-library",
+  "version": "1.0.0",
+  "description": "An example package",
+  "main": "dist/index.js",
+  "files": [
+    "bin/",
+    "dist/"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist/",
+    "lint": "eslint src test",
+    "check": "npm run lint -s && dependency-check package.json --entry src",
+    "toc": "doctoc --github --title \"# Changelog\" CHANGELOG.md",
+    "test": "testem",
+    "prebuild": "npm run check -s && npm run clean -s",
+    "build": "babel --optional runtime src -d dist",
+    "postbuild": "npm run test -s",
+    "prepublish": "npm run build -s",
+    "deploy": "git pull --rebase origin master && git push origin master",
+    "patch": "npm version patch && npm publish",
+    "minor": "npm version minor && npm publish",
+    "major": "npm version major && npm publish",
+    "postpublish": "git push origin master --follow-tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com//example-repo.git"
+  },
+  "keywords": [
+    "node example babel tape"
+  ],
+  "author": "Your Name <your@email.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com//example-repo/issues"
+  },
+  "homepage": "https://github.com//example-repo#readme",
+  "devDependencies": {
+    "babel-cli": "*",
+    "babel-eslint": "*",
+    "babel-preset-es2015": "*",
+    "babelify":"*",
+    "browserify":"*",
+    "coveralls": "*",
+    "dependency-check": "*",
+    "doctoc": "*",
+    "eslint": "*",
+    "tap-spec": "*",
+    "tape": "*",
+    "testem": "*"
+  },
+  "dependencies": {
+    "babel-runtime": "*"
+  }
+}
